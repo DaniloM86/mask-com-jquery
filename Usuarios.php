@@ -17,7 +17,7 @@ class Usuarios{
     }
 
 
-    public function cadastro($Nome,$SobreNome,$Email,$Telefone,$Cpf,$Indentidade){
+    public function cadastro($Nome,$SobreNome,$Email,$Telefone,$Cpf){
         global $pdo;
         $sql = $pdo->prepare("SELECT id FROM tb_jquery WHERE Email = :Email ");
         $sql->bindValue(":Email",$Email);
@@ -30,15 +30,14 @@ class Usuarios{
         else
         {
             $sql = $pdo->prepare('INSERT INTO tb_jquery(Nome,SobreNome,Email,
-             Telefone,Cpf,Identidade)
-            VALUES(:Nome,:SobreNome,:Email,:Telefone,:Cpf,:Identidade)');
+             Telefone,Cpf)
+            VALUES(:Nome,:SobreNome,:Email,:Telefone,:Cpf)');
 
                 $sql->bindValue(":Nome",$Nome);
                 $sql->bindValue(":SobreNome",$SobreNome);
                 $sql->bindValue(":Email",$Email);
                 $sql->bindValue(":Telefone",$Telefone);
                 $sql->bindValue(":Cpf",$Cpf);
-                $sql->bindValue(":Identidade",$Indentidade);
                 $sql->execute();
                 return true;
             }
